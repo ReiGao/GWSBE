@@ -89,20 +89,20 @@ This is the pipiline for this paper.
 
 ```
 	cat range.txt
-```
-qName   tName   tStrand tStart  tEnd
-PBE-ACC-T3_P2_JS-2_HP2/0_23     Chr5    1       13098162        13098185
-PBE-ACC-T1_ACCB/0_23    Chr5    0       13097961        13097984
-PBE-ACC-T2_ACCC/0_23    Chr5    0       13098250        13098273
-PBE-WXB_P3_JS-5_HP3/0_23        Chr6    0       1765048 1765071
-.
-.
-.
-.
+	qName   tName   tStrand tStart  tEnd
+	PBE-ACC-T3_P2_JS-2_HP2/0_23     Chr5    1       13098162        13098185
+	PBE-ACC-T1_ACCB/0_23    Chr5    0       13097961        13097984
+	PBE-ACC-T2_ACCC/0_23    Chr5    0       13098250        13098273
+	PBE-WXB_P3_JS-5_HP3/0_23        Chr6    0       1765048 1765071
+	.
+	.
+	.
+	.
 
 ```
   
    The following script can be combined with ALLSite.vcf generated in step 5 to obtain all ontarget sites in the sgRNA region.
+
 ```
    perl getGeneRange.pl ALLSite.vcf ./range.txt
 ```
