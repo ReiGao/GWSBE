@@ -31,7 +31,7 @@ This is the pipiline for this paper.
 
 ## 4.filter all the varient produced by GATK/Lofreq/Strelka2 use wild type sample;
 
-	First edit the wt.txt file to specify the wild type sample and make sure the sample name is correct.like follow:
+   First edit the wt.txt file to specify the wild type sample and make sure the sample name is correct.like follow:
 	
 ```
     cat wt.txt
@@ -41,7 +41,7 @@ This is the pipiline for this paper.
 	Sample3
 ```
 	
-	Then use follow command to filter the Lofreq/Strelka2 Raw vcf;
+  Then use follow command to filter the Lofreq/Strelka2 Raw vcf;
 	
 ```
 	cd Lofreq
@@ -53,10 +53,10 @@ This is the pipiline for this paper.
 	cd ..
 ```
 	
-	The following filters GATK results, which include filtering regions of repeated sequences by depth to improve SNV accuracy. ($minDepth and $minDepth in the AnaGATK.pl)
-	Corrects incorrect bases on the ref genome through wild-type status.
-	The output file filter.vcf, the third column, 0 and 1 state, 0 means that all wild-type and reference genomes are the same, 1 means that all wild-type and reference genomes are different. 
-	## The outfile of GATK is the base format of future analysis.
+     The following filters GATK results, which include filtering regions of repeated sequences by depth to improve SNV accuracy. ($minDepth and $minDepth in the AnaGATK.pl)
+     Corrects incorrect bases on the ref genome through wild-type status.
+     The output file filter.vcf, the third column, 0 and 1 state, 0 means that all wild-type and reference genomes are the same, 1 means that all wild-type and reference genomes are different. 
+     **The outfile of GATK is the base format of future analysis.
 	
 ```
 	cd GATK
