@@ -8,6 +8,7 @@
 #!/usr/bin/perl -w
 use strict;
 my $outdir="VennALLSITE";
+my $cc=`mkdir -p $outdir`;
 open(OUTLAST,">ALLSite.vcf");
 my %str;
 my @stfile=glob("../strelka/*.filter.vcf");
