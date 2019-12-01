@@ -1,5 +1,5 @@
 #########################################################################
-#	File Name: AnaStr2Vcf.pl
+#	File Name: AnaLoVcf.pl
 #	> Author: QiangGao
 #	> Mail: qgao@genetics.ac.cn 
 #	Created Time: Thu 06 Dec 2018 09:09:56 AM CST
@@ -7,8 +7,7 @@
 
 #!/usr/bin/perl -w
 use strict;
-my @file=`find ./ -name "variants.vcf.gz"`;
-push(@file,@file1);
+my @file=glob("../*.vcf");
 my %back;
 open(IN,"../WT.txt") or die "WT.txt is not in ../";
 while(<IN>){
@@ -20,23 +19,13 @@ my %count;
 my %base;
 my %basef;
 foreach my $file (@file){
-	#../LC-ZP-2-2/results/variants/variants.vcf.gz
-	my ($name)=$file=~/.*\/(.*?)\/resu/;
+	my ($name)=$file=~/\/(.*?)\.vcf/;
 	next if(!(exists $back{$name}));
-	#print "$name\n";
-	open(IN,"gzip -dc $file|");
+	open(IN,"$file");
 	while(<IN>){
 		next if($_=~/^#/);
-		my %h;
 		my @tmp=split("\t",$_);
-		my @t1=split(":",$tmp[8]);
-		my @t2=split(":",$tmp[9]);
-		@h{@t1}=@t2;
-		my ($a,$b)=$h{"AD"}=~/(\d+)\,(\d+)/;
-		#print "$tmp[0]\t$tmp[1]\t$tmp[8]\t$tmp[9]\t$h{'AD'}\n";
-		my $af=$b/($a+$b) unless ($a+$b==0);
-		next if($a+$b==0);
-		#print "$tmp[0]\t$tmp[1]\t$af\n";
+		my ($af)=$_=~/AF=(.*?);/;
 		$count{$tmp[0]}{$tmp[1]}+=1;
 		$base{$tmp[0]}{$tmp[1]}{$tmp[4]}+=1;
 		$basef{$tmp[0]}{$tmp[1]}+=$af;
@@ -83,28 +72,18 @@ foreach my $chr(sort %count){
 close OUT;
 close OUT1;
 foreach my $file (@file){
-	my ($name)=$file=~/.*\/(.*?)\/resu/;
-	print "$name\n";
+	my ($name)=$file=~/\/(.*?)\.vcf/;
 	next if(exists $back{$name});
-	open(IN,"zcat $file|");
+	open(IN,"$file");
 	open(OUT,">$name.filter.vcf");
 	while(<IN>){
 		next if($_=~/^#/);
 		next if($_!~/^Chr/);
-		next if($_!~/\tPASS\t/);
 		my @tmp=split("\t",$_);
-		#next if(length $tmp[3]>1);
-		#next if(length $tmp[4]>1);
-		my %h;
-		my @tmp=split("\t",$_);
-		my @t1=split(":",$tmp[8]);
-		my @t2=split(":",$tmp[9]);
-		@h{@t1}=@t2;
-		my ($a,$b)=$h{"AD"}=~/(\d+)\,(\d+)/;
-		#print "$tmp[0]\t$tmp[1]\t$tmp[8]\t$tmp[9]\t$h{'AD'}\n";
-		my $af=$b/($a+$b) unless ($a+$b==0);
 		next if(exists $back{$tmp[0]}{$tmp[1]});
 		if(exists $dif{$tmp[0]}{$tmp[1]}){
+			my ($af)=$_=~/AF=(.*?);/;
+			#print "$af\t$_\n";
 			next if($af==1);
 		}
 		$tmp[2]=$tmp[3];
