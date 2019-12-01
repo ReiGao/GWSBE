@@ -52,11 +52,11 @@ This is the pipiline for this paper.
 	perl ../Script/AnaStr2Vcf.pl
 	cd ..
 ```
-	
-     The following filters GATK results, which include filtering regions of repeated sequences by depth to improve SNV accuracy. ($minDepth and $minDepth in the AnaGATK.pl)
-     Corrects incorrect bases on the ref genome through wild-type status.
-     The output file filter.vcf, the third column, 0 and 1 state, 0 means that all wild-type and reference genomes are the same, 1 means that all wild-type and reference genomes are different. 
-     **The outfile of GATK is the base format of future analysis.
+
+   The following filters GATK results, which include filtering regions of repeated sequences by depth to improve SNV accuracy. ($minDepth and $minDepth in the AnaGATK.pl)
+   Corrects incorrect bases on the ref genome through wild-type status.
+   The output file filter.vcf, the third column, 0 and 1 state, 0 means that all wild-type and reference genomes are the same, 1 means that all wild-type and reference genomes are different. 
+   **The outfile of GATK is the base format of future analysis.
 	
 ```
 	cd GATK
