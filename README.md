@@ -30,4 +30,12 @@ This is the pipiline for this paper.
 ```
 
 ## 4.Combine all the varient produced by GATK/Lofreq/Strelka2;
-   
+	First edit the wt.txt file to specify the wild type sample and make sure the sample name is correct
+	```
+    cat wt.txt
+	
+	Sample1
+	Sample2
+	Sample3
+	```
+	
