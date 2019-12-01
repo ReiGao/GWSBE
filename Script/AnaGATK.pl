@@ -10,7 +10,7 @@ use strict;
 my $minDepth=500;
 my $maxDepth=40000;
 
-my $vcf="all_last.vcf";
+my $vcf="all_last.filtered.vcf";
 open(IN,"../WT.txt") or die "WT.txt is not in ../";
 my @name=<IN>;
 close IN;
