@@ -21,6 +21,7 @@ This is the pipiline for this paper.
 ## 3.Call SNV/Indel use GATK,Lofreq and Strelka2;
 
 ``` 
+   sh 3.gatk.sh
    #all the bam in the tmp_pipe_date will be use to call the SNV/Indel;
    sh 4.lofreq.sh
    #one bam by one bam used to call snp;each sample will have its vcf file in the lofreq dir;
@@ -29,4 +30,4 @@ This is the pipiline for this paper.
 ```
 
 ## 4.Combine all the varient produced by GATK/Lofreq/Strelka2;
-
+   
