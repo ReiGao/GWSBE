@@ -132,7 +132,7 @@ perl script/ALLSITEnotarget.pl
 
 #### PBE only site use follow command.The output format is the same as above.
 
-    PBE.vcf is the site only contain PBE off-target site.
+   PBE.vcf is the site only contain PBE off-target site.
 
 ```
 perl script/JiaoJiPBE.pl
