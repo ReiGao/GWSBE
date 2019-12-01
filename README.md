@@ -40,10 +40,10 @@ bedtools
 
 ## 4.filter all the varient produced by GATK/Lofreq/Strelka2 use wild type sample.
 
-   First edit the wt.txt file to specify the wild type sample and make sure the sample name is correct.like follow:
+   First edit the WT.txt file to specify the wild type sample and make sure the sample name is correct.like follow:
 	
 ```
-    cat wt.txt
+    cat WT.txt
 	
 	Sample1
 	Sample2
