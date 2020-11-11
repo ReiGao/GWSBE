@@ -149,7 +149,8 @@ perl script/JiaoJiABE.pl
   
 ## 8. find sgRNA-like off-target edits
   
-   We find the sgRNA-like off-target edits using Cas-offinder download from http://www.rgenome.net/cas-offinder/portable and follow the step on the web;
+   We find the sgRNA-like off-target edits using Cas-offinder download from http://www.rgenome.net/cas-offinder/portable and follow the step on the web.
+
    The follow input file using to find lower 5 number of mismatch compare with sgRNA:
 ```
    C:\cas-offtarge\ZH11_genome_chr.cor.fasta
