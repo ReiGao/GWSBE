@@ -6,9 +6,7 @@
 #########################################################################
 
 #!/usr/bin/perl -w
-use strict;
 my @file=`find ./ -name "variants.vcf.gz"`;
-push(@file,@file1);
 my %back;
 open(IN,"../WT.txt") or die "WT.txt is not in ../";
 while(<IN>){

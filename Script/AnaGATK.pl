@@ -10,7 +10,7 @@ use strict;
 my $minDepth=500;
 my $maxDepth=40000;
 
-my $vcf="all_last.filtered.vcf";
+my $vcf="gatk.vcf.gz";
 open(IN,"../WT.txt") or die "WT.txt is not in ../";
 my @name=<IN>;
 close IN;
@@ -21,7 +21,7 @@ foreach(@name){
 }
 my $wtnum=keys %wt;
 close IN;
-open(IN,"$vcf") or die "$vcf is not exists\n";
+open(IN,"gunzip -c $vcf|") or die "$vcf is not exists\n";
 my @samplename;
 my %back;
 my %count;

@@ -5,13 +5,13 @@
 #	Created Time: Thu 13 Nov 2018 01:01:03 PM CST
 #########################################################################
 
-#!/usr/bin/perl -w
-use strict;
+
 my $outdir="VennALLSITE";
 my $cc=`mkdir -p $outdir`;
 open(OUTLAST,">ALLSite.vcf");
 my %str;
-my @stfile=glob("../strelka/*.filter.vcf");
+my %count;
+my @stfile=glob("./strelka/*.filter.vcf");
 foreach my $vcf(@stfile){
 print "$vcf\n";
 open(IN,"$vcf") or die "$vcf is not exists\n";
@@ -47,7 +47,7 @@ while(<IN>){
 }
 
 my %lof;
-my @lofile=glob("../LoFreq/*.filter.vcf");
+my @lofile=glob("./LoFreq/*.filter.vcf");
 foreach my $vcf(@lofile){
 open(IN,"$vcf") or die "$vcf is not exists\n";
 my ($name)=$vcf=~/.*\/(.*?)\./;
@@ -73,7 +73,7 @@ while(<IN>){
 	close OUT;
 }
 
-my $gatk="../GATK/filter.vcf";
+my $gatk="./GATK/filter.vcf";
 open(VCF,"$gatk");
 my @name;
 my $all=0;
@@ -192,10 +192,10 @@ foreach my $name (sort keys %sum1){
 close OUT;
 
 for(my $i=9;$i<@name;$i++){
-		close $handle{$name{$i}};
+		close $handle{$name[$i]};
 }
 
 
 for(my $i=9;$i<@name;$i++){
-		close $handle{$name{$i}};
+		close $handle{$name[$i]};
 }

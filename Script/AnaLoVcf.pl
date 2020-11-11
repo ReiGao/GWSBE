@@ -7,7 +7,7 @@
 
 #!/usr/bin/perl -w
 use strict;
-my @file=glob("../*.vcf");
+my @file=glob("./*.vcf.gz");
 my %back;
 open(IN,"../WT.txt") or die "WT.txt is not in ../";
 while(<IN>){
@@ -19,9 +19,9 @@ my %count;
 my %base;
 my %basef;
 foreach my $file (@file){
-	my ($name)=$file=~/\/(.*?)\.vcf/;
+	my ($name)=$file=~/.*\/(.*?)\.vcf/;
 	next if(!(exists $back{$name}));
-	open(IN,"$file");
+	open(IN,"gunzip -c $file|");
 	while(<IN>){
 		next if($_=~/^#/);
 		my @tmp=split("\t",$_);
@@ -35,30 +35,30 @@ foreach my $file (@file){
 open(OUT,">WT.all.txt");
 open(OUT1,">WT.diff.txt");
 my %dif;
-my %back;
+my %back1;
 foreach my $chr(sort %count){
 	my @pos=sort keys %{$count{$chr}};
 	foreach my $pos (@pos){
 		my $flag=0;
 		my $base;
-		if($count{$chr}{$pos}==8){
+		if($count{$chr}{$pos}==keys %back){
 			my @base=keys %{$base{$chr}{$pos}};
 			if(@base>1){
 				$flag=0;
-				$back{$chr}{$pos}+=1;
+				$back1{$chr}{$pos}+=1;
 			}else{
-				if($basef{$chr}{$pos}==8){
+				if($basef{$chr}{$pos}== keys %back){
 				$flag=1;
 				$dif{$chr}{$pos}="$base[0]";
 				$base=$base[0];
 				}else{
 				 $flag=0;
-				 $back{$chr}{$pos}+=1;
+				 $back1{$chr}{$pos}+=1;
 				}
 			}
 		}else{
 			$flag=0;
-			$back{$chr}{$pos}+=1;
+			$back1{$chr}{$pos}+=1;
 		}
 		if($flag==0){
 			print OUT "$chr\t$pos\t$count{$chr}{$pos}\n";
@@ -74,13 +74,13 @@ close OUT1;
 foreach my $file (@file){
 	my ($name)=$file=~/\/(.*?)\.vcf/;
 	next if(exists $back{$name});
-	open(IN,"$file");
+	open(IN,"gunzip -c $file|");
 	open(OUT,">$name.filter.vcf");
 	while(<IN>){
 		next if($_=~/^#/);
-		next if($_!~/^Chr/);
+		#next if($_!~/^Chr/);
 		my @tmp=split("\t",$_);
-		next if(exists $back{$tmp[0]}{$tmp[1]});
+		next if(exists $back1{$tmp[0]}{$tmp[1]});
 		if(exists $dif{$tmp[0]}{$tmp[1]}){
 			my ($af)=$_=~/AF=(.*?);/;
 			#print "$af\t$_\n";
